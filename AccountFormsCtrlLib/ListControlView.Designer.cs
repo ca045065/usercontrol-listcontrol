@@ -38,13 +38,14 @@
             this.vScrollBarAdv1.Name = "vScrollBarAdv1";
             this.vScrollBarAdv1.Size = new System.Drawing.Size(20, 381);
             this.vScrollBarAdv1.TabIndex = 0;
+            //this.vScrollBarAdv1.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
             this.vScrollBarAdv1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBarAdv1_Scroll);
             // 
             // ListControlView
             // 
+            //this.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.Controls.Add(this.vScrollBarAdv1);
-            //this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.Name = "ListControlView";
             this.Size = new System.Drawing.Size(279, 381);
             this.Resize += new System.EventHandler(this.ListControlView_Resize);

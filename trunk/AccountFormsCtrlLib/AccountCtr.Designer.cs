@@ -78,7 +78,7 @@
             this.UidLab.Enabled = false;
             this.UidLab.Location = new System.Drawing.Point(97, 20);
             this.UidLab.Name = "UidLab";
-            this.UidLab.Size = new System.Drawing.Size(50, 16);
+            this.UidLab.Size = new System.Drawing.Size(83, 16);
             this.UidLab.TabIndex = 6;
             this.UidLab.Text = "labelX4";
             // 
@@ -87,7 +87,7 @@
             this.AccountLab.Enabled = false;
             this.AccountLab.Location = new System.Drawing.Point(43, 58);
             this.AccountLab.Name = "AccountLab";
-            this.AccountLab.Size = new System.Drawing.Size(50, 16);
+            this.AccountLab.Size = new System.Drawing.Size(150, 16);
             this.AccountLab.TabIndex = 5;
             this.AccountLab.Text = "labelX3";
             // 
@@ -120,10 +120,9 @@
             this.UserName.Enabled = false;
             this.UserName.Location = new System.Drawing.Point(97, 4);
             this.UserName.Name = "UserName";
-            this.UserName.Size = new System.Drawing.Size(31, 18);
+            this.UserName.Size = new System.Drawing.Size(83, 18);
             this.UserName.TabIndex = 1;
             this.UserName.Text = "姓名";
-            this.UserName.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
             // labelX3
             // 
@@ -148,16 +147,14 @@
             // lbGrade
             // 
             this.lbGrade.Enabled = false;
-            this.lbGrade.Location = new System.Drawing.Point(96, 37);
+            this.lbGrade.Location = new System.Drawing.Point(96, 40);
             this.lbGrade.Name = "lbGrade";
-            this.lbGrade.Size = new System.Drawing.Size(50, 16);
+            this.lbGrade.Size = new System.Drawing.Size(84, 16);
             this.lbGrade.TabIndex = 10;
             this.lbGrade.Text = "labelX5";
             // 
             // AccountCtr
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.Name = "AccountCtr";
             this.panelEx1.ResumeLayout(false);

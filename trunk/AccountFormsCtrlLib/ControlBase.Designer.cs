@@ -52,8 +52,8 @@
             // 
             // ControlBase
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+//             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+//             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.panelEx1);
             this.Margin = new System.Windows.Forms.Padding(0);

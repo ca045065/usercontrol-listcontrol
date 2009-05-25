@@ -62,14 +62,12 @@ namespace AccountFormsCtrlLib
         {
             InitializeComponent();
             m_myControls = new List<ControlBase>();
-            vScrollBarAdv1.Maximum = 10;
-            vScrollBarAdv1.Minimum = 0;
             initilzeControlNum = Controls.Count;
             vScrollBarAdv1.Enabled = false;
             LastScrollValue = 0;
 
             this.vScrollBarAdv1.Minimum = 0;
-            this.vScrollBarAdv1.Maximum = 80;
+            this.vScrollBarAdv1.Maximum = 0;
             this.vScrollBarAdv1.LargeChange = 80;
             this.vScrollBarAdv1.SmallChange = 20;
             this.vScrollBarAdv1.Focus();
@@ -130,6 +128,7 @@ namespace AccountFormsCtrlLib
 
         public void Add(ControlBase value)
         {
+            //value.Enabled = false;
             value.Size = new Size(this.Size.Width - this.vScrollBarAdv1.Width - 2, 80);
             value.AllowDrop = true;
             value.MouseDown += new MouseEventHandler(this.Controls_MouseDown);
@@ -228,6 +227,11 @@ namespace AccountFormsCtrlLib
             }
             DragIndex = SelectIndex;
             lastDragOver = ((ControlBase)sender);
+            if (this.ContextMenu != null)
+            {
+                this.ContextMenu.Show(lastDragOver, e.Location);
+            }
+   
             ((ControlBase)sender).DoDragDrop("", DragDropEffects.Copy | DragDropEffects.Move);
             this.Cursor = System.Windows.Forms.Cursors.Default;
         }
@@ -365,6 +369,12 @@ namespace AccountFormsCtrlLib
 
 
             }
+
+            ListControls[Index].MouseDown -= new MouseEventHandler(this.Controls_MouseDown);
+            ListControls[Index].QueryContinueDrag -= new System.Windows.Forms.QueryContinueDragEventHandler(this.Controls_QueryContinueDrag);
+            ListControls[Index].DragOver -= new System.Windows.Forms.DragEventHandler(this.Controls_DragOver);
+            ListControls[Index].DragLeave -= new EventHandler(Controls_DragLeave);
+            ListControls[Index].DragDrop -= new DragEventHandler(Controls_DragDrop);
 
             Controls.Remove(ListControls[Index]);
             ListControls.RemoveAt(Index);

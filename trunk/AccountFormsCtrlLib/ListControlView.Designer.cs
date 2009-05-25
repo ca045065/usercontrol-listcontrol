@@ -41,6 +41,8 @@
             this.vScrollBarAdv1.Name = "vScrollBarAdv1";
             this.vScrollBarAdv1.Size = new System.Drawing.Size(20, 381);
             this.vScrollBarAdv1.TabIndex = 0;
+            this.vScrollBarAdv1.Visible = true;
+            this.vScrollBarAdv1.Enabled = true;
             //this.vScrollBarAdv1.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
             this.vScrollBarAdv1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBarAdv1_Scroll);
             // 
@@ -52,17 +54,17 @@
             this.Name = "ListControlView";
             this.Size = new System.Drawing.Size(279, 381);
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("myback")));
-            this.Resize += new System.EventHandler(this.ListControlView_Resize);
+            //this.Resize += new System.EventHandler(this.ListControlView_Resize);
             this.ResumeLayout(false);
 
         }
 
-        void ListControlView_Resize(object sender, System.EventArgs e)
-        {
-            this.vScrollBarAdv1.Size = new System.Drawing.Size(this.vScrollBarAdv1.Size.Width, this.Size.Height);
-
-            this.vScrollBarAdv1.Location = new System.Drawing.Point(Size.Width - vScrollBarAdv1.Size.Width, vScrollBarAdv1.Location.Y);
-        }
+//         void ListControlView_Resize(object sender, System.EventArgs e)
+//         {
+//             this.vScrollBarAdv1.Size = new System.Drawing.Size(this.vScrollBarAdv1.Size.Width, this.Size.Height);
+// 
+//             this.vScrollBarAdv1.Location = new System.Drawing.Point(Size.Width - vScrollBarAdv1.Size.Width, vScrollBarAdv1.Location.Y);
+//         }
 
         #endregion
 

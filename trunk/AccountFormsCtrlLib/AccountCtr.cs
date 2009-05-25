@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,12 @@ namespace AccountFormsCtrlLib
             UidLab.Text = m_strMyUid;
             UserName.Text = m_strMyName;
             lbGrade.Text = iGrade.ToString();
-            pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\1234.jpg");
+
+            string strFilePath = Application.StartupPath + @"\pic\" + strUid + ".jpg";
+            if (File.Exists(strFilePath))
+            {
+                pictureBox1.Image = Image.FromFile(strFilePath);
+            }
         }
 
         public int Index

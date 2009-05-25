@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListControlView));
+
             this.vScrollBarAdv1 = new DevComponents.DotNetBar.VScrollBarAdv();
+            //this.vScrollBarAdv1 = new System.Windows.Forms.VScrollBar();
             this.SuspendLayout();
             // 
             // vScrollBarAdv1
@@ -48,6 +51,7 @@
             this.Controls.Add(this.vScrollBarAdv1);
             this.Name = "ListControlView";
             this.Size = new System.Drawing.Size(279, 381);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("myback")));
             this.Resize += new System.EventHandler(this.ListControlView_Resize);
             this.ResumeLayout(false);
 
@@ -63,6 +67,6 @@
         #endregion
 
         private DevComponents.DotNetBar.VScrollBarAdv vScrollBarAdv1;
-
+        //private System.Windows.Forms.VScrollBar vScrollBarAdv1;
     }
 }

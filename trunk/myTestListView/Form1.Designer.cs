@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.listControlView1 = new AccountFormsCtrlLib.ListControlView();
+            this.btRemove = new DevComponents.DotNetBar.ButtonX();
             this.SuspendLayout();
             // 
             // buttonX1
@@ -45,20 +47,32 @@
             // 
             // listControlView1
             // 
-            this.listControlView1.AddFromEnd = true;
             this.listControlView1.AddFromFirst = false;
             this.listControlView1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.listControlView1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("listControlView1.BackgroundImage")));
             this.listControlView1.Location = new System.Drawing.Point(12, 2);
             this.listControlView1.Name = "listControlView1";
             this.listControlView1.SelectIndex = -1;
             this.listControlView1.Size = new System.Drawing.Size(218, 360);
             this.listControlView1.TabIndex = 0;
             // 
+            // btRemove
+            // 
+            this.btRemove.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btRemove.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btRemove.Location = new System.Drawing.Point(252, 82);
+            this.btRemove.Name = "btRemove";
+            this.btRemove.Size = new System.Drawing.Size(75, 23);
+            this.btRemove.TabIndex = 3;
+            this.btRemove.Text = "Remove";
+            this.btRemove.Click += new System.EventHandler(this.btRemove_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 374);
+            this.Controls.Add(this.btRemove);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.listControlView1);
             this.Name = "Form1";
@@ -71,6 +85,7 @@
 
         private AccountFormsCtrlLib.ListControlView listControlView1;
         private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.ButtonX btRemove;
 
 
     }

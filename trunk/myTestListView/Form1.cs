@@ -21,9 +21,14 @@ namespace myTestListView
         {
             AccountCtr myAccount = new AccountCtr("sfasdfas", "haah", "12342134", listControlView1.Count);
             myAccount.Name = "accountCtr" + listControlView1.Count;
-            myAccount.Size = new System.Drawing.Size(196, 80);
+            myAccount.Size = new System.Drawing.Size(300, 80);
             listControlView1.Add(myAccount);
             listControlView1.Focus();
+        }
+
+        private void btRemove_Click(object sender, EventArgs e)
+        {
+            listControlView1.RemoveAt(listControlView1.SelectIndex);
         }
     }
 }

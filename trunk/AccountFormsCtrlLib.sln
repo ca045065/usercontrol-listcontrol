@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountFormsCtrlLib", "AccountFormsCtrlLib\AccountFormsCtrlLib.csproj", "{325CF69C-B29D-482A-B02D-5A56EE251C5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myTestListView", "myTestListView\myTestListView.csproj", "{E62AC879-6034-4411-A291-13BBBC1A2CFC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{325CF69C-B29D-482A-B02D-5A56EE251C5A} = {325CF69C-B29D-482A-B02D-5A56EE251C5A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -30,7 +30,7 @@ namespace AccountFormsCtrlLib
 
         private bool AutoScroll = true;
 
-        private bool bAddFromFirstorEnd = false;
+        private bool bAddFromFirstorEnd = true;
 
         private int LastDragY = 0;
 
@@ -55,18 +55,6 @@ namespace AccountFormsCtrlLib
             set
             {
                 bAddFromFirstorEnd = value;
-            }
-        }
-
-        public bool AddFromEnd
-        {
-            get
-            {
-                return !bAddFromFirstorEnd;
-            }
-            set
-            {
-                bAddFromFirstorEnd = !value;
             }
         }
 
@@ -129,7 +117,7 @@ namespace AccountFormsCtrlLib
 
         public void DoSelectAction()
         {
-            if (LastSelectIndex >= 0)
+            if ((LastSelectIndex >= 0) && (LastSelectIndex < ListControls.Count))
             {
                 ListControls[LastSelectIndex].DeleteBorderForNoSelect();
             }
@@ -142,6 +130,7 @@ namespace AccountFormsCtrlLib
 
         public void Add(ControlBase value)
         {
+            value.Size = new Size(this.Size.Width - this.vScrollBarAdv1.Width - 2, 80);
             value.AllowDrop = true;
             value.MouseDown += new MouseEventHandler(this.Controls_MouseDown);
             value.QueryContinueDrag += new System.Windows.Forms.QueryContinueDragEventHandler(this.Controls_QueryContinueDrag);
@@ -149,7 +138,6 @@ namespace AccountFormsCtrlLib
             value.DragLeave += new EventHandler(Controls_DragLeave);
             value.DragDrop += new DragEventHandler(Controls_DragDrop);
             Controls.Add(value);
-            ListControls.Add(value);
 
             TotalControlHeight += value.Size.Height;
             LastWheelValue = -1;
@@ -276,65 +264,32 @@ namespace AccountFormsCtrlLib
                     
                     for (iCnt = SelectIndex - 1; iCnt >= DragIndex; --iCnt)
                     {
-                        ListControls[iCnt].Location = new Point(1, ListControls[iCnt].Location.Y + SelectControl.Size.Height);
+                        if (ListControls[iCnt].Visible == true)
+                        {
+                            ListControls[iCnt].Location = new Point(1, ListControls[iCnt].Location.Y + SelectControl.Size.Height);
+
+                        }
                         ListControls[iCnt + 1] = ListControls[iCnt];
                     }
                     SelectControl.Location = DragPoint;
+                    EnableControl(SelectControl);
                     ListControls[DragIndex] = SelectControl;
                     SelectIndex = DragIndex;
-
-                    /*
-                    int CurIndex = 0;
-                    for (iCnt = IndexVisibleList.Count - 1; iCnt >= 0; --iCnt)
-                    {
-                        CurIndex = IndexVisibleList[iCnt];
-                        if (CurIndex == DragIndex)
-                        {
-                            SelectControl.Location = DragPoint;
-                            ListControls[DragIndex] = SelectControl;
-                            SelectIndex = DragIndex;
-                            break;
-                        }
-                        else
-                        {
-                            ListControls[CurIndex].Location = new Point(1, ListControls[CurIndex].Location.Y + SelectControl.Size.Height);
-                            ListControls[CurIndex + 1] = ListControls[CurIndex];
-                        }
-                    }
-                     * */
-
                 }
                 else if (SelectIndex < DragIndex)
                 {
-                    
                     for (iCnt = SelectIndex + 1; iCnt <= DragIndex; ++iCnt)
                     {
-                        ListControls[iCnt].Location = new Point(1, ListControls[iCnt].Location.Y - SelectControl.Size.Height);
+                        if (ListControls[iCnt].Visible == true)
+                        {
+                            ListControls[iCnt].Location = new Point(1, ListControls[iCnt].Location.Y - SelectControl.Size.Height);
+                        }
                         ListControls[iCnt - 1] = ListControls[iCnt];
                     }
                     SelectControl.Location = DragPoint;
+                    EnableControl(SelectControl);
                     ListControls[DragIndex] = SelectControl;
                     SelectIndex = DragIndex;
-                     
-                    /*
-                    int CurIndex = 0;
-                    for (iCnt = IndexVisibleList.Count - 1; iCnt >= 0; --iCnt)
-                    {
-                        CurIndex = IndexVisibleList[iCnt];
-                        if (CurIndex == DragIndex)
-                        {
-                            SelectControl.Location = DragPoint;
-                            ListControls[DragIndex] = SelectControl;
-                            SelectIndex = DragIndex;
-                            break;
-                        }
-                        else
-                        {
-                            ListControls[CurIndex].Location = new Point(1, ListControls[CurIndex].Location.Y + SelectControl.Size.Height);
-                            ListControls[CurIndex + 1] = ListControls[CurIndex];
-                        }
-                    }
-                     * */
                 }
                 else
                 {
@@ -353,21 +308,82 @@ namespace AccountFormsCtrlLib
             }
         }
 
-        public void InsertAt(int Index, ControlBase value)
-        {
-        }
+//         public void InsertAt(int Index, ControlBase value)
+//         {
+//         }
 
         public void Remove(ControlBase value)
         {
-            Controls.Remove(value);
-
-            TotalControlHeight -= value.Size.Height;
-            PlaceRemove(value);
+            int index = ListControls.IndexOf(value);
+            RemoveAt(index);
         }
 
         public void RemoveAt(int Index)
         {
+            if ((Index < 0) || (Index >= ListControls.Count))
+            {
+                return;
+            }
+            int lastTotalHeight = TotalControlHeight;
+            TotalControlHeight -= ListControls[Index].Size.Height;
+            if (TotalControlHeight < vScrollBarAdv1.ClientSize.Height)
+            {
+                this.vScrollBarAdv1.Maximum = 0;
+                this.vScrollBarAdv1.Value = 0;
+                vScrollBarAdv1.Enabled = false;
+            }
+            else
+            {
+                int lastMax = this.vScrollBarAdv1.Maximum;
+                int lastValue = this.vScrollBarAdv1.Value;
 
+                int lastheightdiff = lastTotalHeight - this.vScrollBarAdv1.ClientSize.Height;
+                int heightdiff = TotalControlHeight - this.vScrollBarAdv1.ClientSize.Height;
+
+                int lastvalueMax = lastMax - this.vScrollBarAdv1.LargeChange + 1;
+
+                int currentMax = (int)((double)(TotalControlHeight * vScrollBarAdv1.LargeChange) / (double)vScrollBarAdv1.ClientSize.Height);
+
+                int valueMax = currentMax - this.vScrollBarAdv1.LargeChange + 1;
+
+                int currentvalue = (int)((double)(lastheightdiff * valueMax * lastValue) / (lastvalueMax * heightdiff));
+
+                this.vScrollBarAdv1.Maximum = currentMax;
+
+                if (this.vScrollBarAdv1.Value <= 0)
+                {
+                    this.vScrollBarAdv1.Value = 1;
+                }
+                else if (this.vScrollBarAdv1.Value > valueMax)
+                {
+                    this.vScrollBarAdv1.Value = valueMax;
+                }
+                else
+                {
+                    this.vScrollBarAdv1.Value = currentvalue;
+                }
+
+
+            }
+
+            Controls.Remove(ListControls[Index]);
+            ListControls.RemoveAt(Index);
+
+            DoScrollAction();
+
+            if (SelectIndex >= ListControls.Count)
+            {
+                SelectIndex = ListControls.Count - 1;
+            }
+            else if (SelectIndex < 0)
+            {
+                SelectIndex = 0;
+            }
+            else
+            {
+                SelectIndex = SelectIndex;
+            }
+            Update();
         }
 
         public bool ExChangeControl(int itemIndex1, int itemIndex2)
@@ -403,28 +419,43 @@ namespace AccountFormsCtrlLib
                 vScrollBarAdv1.Enabled = true;
             }
             IndexVisibleList.Clear();
-            int currentHeigth = 0;
+            int currentHeigth = value.Size.Height;
 
-            for (int i = initilzeControlNum; i < Controls.Count; ++i)
+            for (int i = 0; i < ListControls.Count; ++i)
             {
                 if (currentHeigth < Size.Height)
                 {
-                    IndexVisibleList.Insert(0, i);
-                    EnableControl(Controls[i]);
-                    Controls[i].Location = new Point(1, currentHeigth);
-                    currentHeigth += Controls[i].Size.Height;
+                    IndexVisibleList.Add(i + 1);
+                    EnableControl(ListControls[i]);
+                    ListControls[i].Location = new Point(1, currentHeigth);
+                    currentHeigth += ListControls[i].Size.Height;
                 }
                 else
                 {
-                    DisableControl(Controls[i]);
+                    DisableControl(ListControls[i]);
                 }
             }
+
+            value.Location = new Point(1, 0);
+            EnableControl(value);
+            ListControls.Insert(0, value);
+            IndexVisibleList.Insert(0, 0);
+
+            if (TotalControlHeight > Size.Height)
+            {
+                this.vScrollBarAdv1.Maximum = (int)((double)(TotalControlHeight * vScrollBarAdv1.LargeChange) / (double)vScrollBarAdv1.ClientSize.Height);
+                this.vScrollBarAdv1.Value = 1;
+            }
+            selectIndex = SelectIndex + 1;
+            SelectIndex = 0;
+            vScrollBarAdv1.Update();
             Update();
         }
 
         private void PlaceAddFromEnd(ControlBase value)
         {
             IndexVisibleList.Clear();
+            ListControls.Add(value);
 
             if (TotalControlHeight > Size.Height)
             {
@@ -469,6 +500,7 @@ namespace AccountFormsCtrlLib
                     }
                 }
              }
+            SelectIndex = ListControls.Count - 1;
             Update();
         }
  
@@ -483,7 +515,12 @@ namespace AccountFormsCtrlLib
             //this.vScrollBarAdv1.Cursor = System.Windows.Forms.Cursors.NoMoveVert;
             int wheelValue = vScrollBarAdv1.Value;
 
-            int k = (int)(((double)(TotalControlHeight - this.vScrollBarAdv1.ClientSize.Height) / (double)(this.vScrollBarAdv1.Maximum - this.vScrollBarAdv1.LargeChange + 1)) * wheelValue);
+            int k = 0;
+
+            if (TotalControlHeight > this.vScrollBarAdv1.ClientSize.Height)
+            {
+                k = (int)(((double)(TotalControlHeight - this.vScrollBarAdv1.ClientSize.Height) / (double)(this.vScrollBarAdv1.Maximum - this.vScrollBarAdv1.LargeChange + 1)) * wheelValue);
+            }
 
             int position = k;
             int currentHeight = 0;
@@ -516,10 +553,7 @@ namespace AccountFormsCtrlLib
                     DisableControl(myCtl);
                 }
             }
-//             if ((wheelValue == 0) || (wheelValue == (this.vScrollBarAdv1.Maximum - this.vScrollBarAdv1.LargeChange + 1)))
-//             {
-//                 this.Cursor = System.Windows.Forms.Cursors.Default;
-//             }
+
             Update();
         }
 

@@ -153,6 +153,7 @@ namespace AccountFormsCtrlLib
 
         void Controls_DragDrop(object sender, DragEventArgs e)
         {
+            Console.Write("Controls_DragDrop\n");
             int iCnt = 0;
             ControlBase SelectControl = ListControls[SelectIndex];
             if (SelectIndex > DragIndex)
@@ -231,8 +232,11 @@ namespace AccountFormsCtrlLib
             {
                 this.ContextMenu.Show(lastDragOver, e.Location);
             }
-   
-            ((ControlBase)sender).DoDragDrop("", DragDropEffects.Copy | DragDropEffects.Move);
+            if (e.Button == MouseButtons.Left)
+            {
+                ((ControlBase)sender).DoDragDrop("", DragDropEffects.Copy | DragDropEffects.None);
+            }
+
             this.Cursor = System.Windows.Forms.Cursors.Default;
         }
 

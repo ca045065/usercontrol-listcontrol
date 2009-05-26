@@ -24,7 +24,7 @@ namespace myTestListView
             myAccount.Size = new System.Drawing.Size(300, 80);
             listControlView1.Add(myAccount);
             listControlView1.Focus();
-            contextMenuBar1.SetContextMenuEx(listControlView1, buttonItem1);
+            //contextMenuBar1.SetContextMenuEx(listControlView1, buttonItem1);
         }
 
         private void btRemove_Click(object sender, EventArgs e)

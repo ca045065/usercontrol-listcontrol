@@ -1,4 +1,4 @@
-﻿namespace AccountFormsCtrlLib
+﻿namespace myTestListView
 {
     partial class AccountCtr
     {

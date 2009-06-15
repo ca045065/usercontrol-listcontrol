@@ -30,12 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
-            this.listControlView1 = new AccountFormsCtrlLib.ListControlView();
-            this.btRemove = new DevComponents.DotNetBar.ButtonX();
-            this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
+            this.btRemove = new DevComponents.DotNetBar.ButtonX();
             this.listViewEx1 = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.listControlView1 = new AccountFormsCtrlLib.ListControlView();
+            this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
+            this.btTest = new DevComponents.DotNetBar.ButtonX();
             this.listControlView1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             this.SuspendLayout();
@@ -44,48 +45,12 @@
             // 
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Location = new System.Drawing.Point(252, 33);
+            this.buttonX1.Location = new System.Drawing.Point(249, 21);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(75, 23);
             this.buttonX1.TabIndex = 1;
             this.buttonX1.Text = "Add";
             this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
-            // 
-            // listControlView1
-            // 
-            this.listControlView1.AddFromFirst = false;
-            this.listControlView1.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.listControlView1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("listControlView1.BackgroundImage")));
-            this.listControlView1.Controls.Add(this.contextMenuBar1);
-            this.listControlView1.Location = new System.Drawing.Point(12, 2);
-            this.listControlView1.Name = "listControlView1";
-            this.listControlView1.SelectIndex = -1;
-            this.listControlView1.Size = new System.Drawing.Size(218, 360);
-            this.listControlView1.TabIndex = 0;
-            // 
-            // btRemove
-            // 
-            this.btRemove.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btRemove.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btRemove.Location = new System.Drawing.Point(252, 82);
-            this.btRemove.Name = "btRemove";
-            this.btRemove.Size = new System.Drawing.Size(75, 23);
-            this.btRemove.TabIndex = 3;
-            this.btRemove.Text = "Remove";
-            this.btRemove.Click += new System.EventHandler(this.btRemove_Click);
-            // 
-            // contextMenuBar1
-            // 
-            this.contextMenuBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem1});
-            this.contextMenuBar1.Location = new System.Drawing.Point(49, 78);
-            this.contextMenuBar1.Name = "contextMenuBar1";
-            this.contextMenuBar1.Size = new System.Drawing.Size(75, 25);
-            this.contextMenuBar1.Stretch = true;
-            this.contextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2003;
-            this.contextMenuBar1.TabIndex = 1;
-            this.contextMenuBar1.TabStop = false;
-            this.contextMenuBar1.Text = "contextMenuBar1";
             // 
             // buttonItem1
             // 
@@ -103,6 +68,17 @@
             this.buttonItem2.Text = "buttonItem2";
             this.buttonItem2.Click += new System.EventHandler(this.buttonItem2_Click);
             // 
+            // btRemove
+            // 
+            this.btRemove.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btRemove.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btRemove.Location = new System.Drawing.Point(249, 70);
+            this.btRemove.Name = "btRemove";
+            this.btRemove.Size = new System.Drawing.Size(75, 23);
+            this.btRemove.TabIndex = 3;
+            this.btRemove.Text = "Remove";
+            this.btRemove.Click += new System.EventHandler(this.btRemove_Click);
+            // 
             // listViewEx1
             // 
             // 
@@ -115,11 +91,48 @@
             this.listViewEx1.TabIndex = 4;
             this.listViewEx1.UseCompatibleStateImageBehavior = false;
             // 
+            // listControlView1
+            // 
+            this.listControlView1.AddFromFirst = false;
+            this.listControlView1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.listControlView1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("listControlView1.BackgroundImage")));
+            this.listControlView1.Controls.Add(this.contextMenuBar1);
+            this.listControlView1.Location = new System.Drawing.Point(12, 2);
+            this.listControlView1.Name = "listControlView1";
+            this.listControlView1.SelectIndex = -1;
+            this.listControlView1.Size = new System.Drawing.Size(218, 360);
+            this.listControlView1.TabIndex = 0;
+            // 
+            // contextMenuBar1
+            // 
+            this.contextMenuBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem1});
+            this.contextMenuBar1.Location = new System.Drawing.Point(49, 78);
+            this.contextMenuBar1.Name = "contextMenuBar1";
+            this.contextMenuBar1.Size = new System.Drawing.Size(75, 25);
+            this.contextMenuBar1.Stretch = true;
+            this.contextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2003;
+            this.contextMenuBar1.TabIndex = 1;
+            this.contextMenuBar1.TabStop = false;
+            this.contextMenuBar1.Text = "contextMenuBar1";
+            // 
+            // btTest
+            // 
+            this.btTest.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btTest.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btTest.Location = new System.Drawing.Point(249, 112);
+            this.btTest.Name = "btTest";
+            this.btTest.Size = new System.Drawing.Size(75, 23);
+            this.btTest.TabIndex = 5;
+            this.btTest.Text = "Test";
+            this.btTest.Click += new System.EventHandler(this.btTest_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 374);
+            this.Controls.Add(this.btTest);
             this.Controls.Add(this.listViewEx1);
             this.Controls.Add(this.btRemove);
             this.Controls.Add(this.buttonX1);
@@ -142,6 +155,7 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem1;
         private DevComponents.DotNetBar.ButtonItem buttonItem2;
         private DevComponents.DotNetBar.Controls.ListViewEx listViewEx1;
+        private DevComponents.DotNetBar.ButtonX btTest;
 
 
     }

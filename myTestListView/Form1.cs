@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AccountFormsCtrlLib;
+using System.Threading;
 
 namespace myTestListView
 {
@@ -41,6 +42,16 @@ namespace myTestListView
         {
             //contextMenuBar1.SetContextMenuEx(listControlView1, buttonItem1);
             //listControlView1.ContextMenu;
+        }
+
+        private void btTest_Click(object sender, EventArgs e)
+        {
+            for (int j = 0; j < listControlView1.ListControls.Count; ++j)
+            {
+                listControlView1.SelectIndex = j;
+                listControlView1.ScrollToIndex(j);
+                Thread.Sleep(2000);
+            }
         }
     }
 }

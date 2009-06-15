@@ -20,7 +20,8 @@ namespace AccountFormsCtrlLib
 
         private int selectIndex = -1;
         private int lastSelectIndex = -1;
-        public EventHandler SelectIndexChanged;
+        public event System.EventHandler SelectedIndexChanged;
+        public event System.EventHandler DragDrop;
 
         private List<int> IndexVisibleList = new List<int>();
 
@@ -107,11 +108,22 @@ namespace AccountFormsCtrlLib
         private void OnSelectIndexChanged() 
         {
             DoSelectAction();
-            if(SelectIndexChanged != null)
+            if (SelectedIndexChanged != null)
             {
-                SelectIndexChanged(this,null);
+                if ((SelectIndex >= 0) && (SelectIndex < ListControls.Count))
+                {
+                    SelectedIndexChanged(ListControls[selectIndex], null);
+                }
             }
-        } 
+        }
+
+        private void OnDragDrop()
+        {
+            if (DragDrop != null)
+            {
+                DragDrop(ListControls[selectIndex], null);
+            }
+        }
 
         public void DoSelectAction()
         {
@@ -120,7 +132,7 @@ namespace AccountFormsCtrlLib
                 ListControls[LastSelectIndex].DeleteBorderForNoSelect();
             }
 
-            if (SelectIndex >= 0)
+            if ((SelectIndex >= 0) && (SelectIndex < ListControls.Count))
             {
                 ListControls[SelectIndex].ShowBorderForSelect();
             }
@@ -283,6 +295,7 @@ namespace AccountFormsCtrlLib
                     EnableControl(SelectControl);
                     ListControls[DragIndex] = SelectControl;
                     SelectIndex = DragIndex;
+                    OnDragDrop();
                 }
                 else if (SelectIndex < DragIndex)
                 {
@@ -298,6 +311,7 @@ namespace AccountFormsCtrlLib
                     EnableControl(SelectControl);
                     ListControls[DragIndex] = SelectControl;
                     SelectIndex = DragIndex;
+                    OnDragDrop();
                 }
                 else
                 {
@@ -492,7 +506,6 @@ namespace AccountFormsCtrlLib
                 }
                 this.vScrollBarAdv1.Maximum = (int)((double)(TotalControlHeight * vScrollBarAdv1.LargeChange) / (double)vScrollBarAdv1.ClientSize.Height);
                 this.vScrollBarAdv1.Value = vScrollBarAdv1.Maximum - vScrollBarAdv1.LargeChange + 1;
-
             }
             else
             {
@@ -571,9 +584,40 @@ namespace AccountFormsCtrlLib
             Update();
         }
 
-        private void PlaceRemove(ControlBase value)
-        {
+//         private void PlaceRemove(ControlBase value)
+//         {
+//         }
 
+        public void ScrollToIndex(int iIndex)
+        {
+            if ((iIndex < 0) || (iIndex >= ListControls.Count))
+            {
+                return;
+            }
+
+            if (TotalControlHeight <= vScrollBarAdv1.ClientSize.Height)
+            {
+                vScrollBarAdv1.Value = 0;
+                DoScrollAction();
+                return;
+            }
+
+            int CurrentIndexHeight = 0;
+
+            for(int iCnt = 0; iCnt <iIndex; ++iCnt)
+            {
+                CurrentIndexHeight += ListControls[iCnt].Height;
+            }
+
+            if ((TotalControlHeight - CurrentIndexHeight) <= vScrollBarAdv1.ClientSize.Height)
+            {
+                vScrollBarAdv1.Value = vScrollBarAdv1.Maximum - vScrollBarAdv1.LargeChange + 1;
+                DoScrollAction();
+                return;
+            }
+
+            vScrollBarAdv1.Value = (int)(((double)(vScrollBarAdv1.Maximum - vScrollBarAdv1.LargeChange + 1) / (TotalControlHeight - vScrollBarAdv1.ClientSize.Height)) * CurrentIndexHeight);
+            DoScrollAction();
         }
 
     }

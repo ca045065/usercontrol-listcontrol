@@ -1,0 +1,1 @@
+基于现在C#的控件中没有一个很好的控制UserControl的ListView,开发一个能够有自己想做成什么样的module就能很好的放进ListView，可以Drag,可以Scroll
